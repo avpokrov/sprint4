@@ -1,6 +1,11 @@
 .section{
-    font-family: Inter, Arial;
     box-sizing: border-box;
     width: 100%;
     color: #ffffff;
+}
+
+@media all and (max-width: 920px){
+    .section{
+        padding: 0 20px;
+    }
 }

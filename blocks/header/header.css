@@ -1,4 +1,13 @@
 .header{
-    padding: 45px 0 41px;
+    height: 123px;
+    display: flex;
+    align-items: center;
     border-bottom: 1px solid rgba(84, 84, 84, .7);
+}
+
+@media screen and (max-width: 619px) {
+    .header{
+        height: 85px;        
+    }
+    
 }

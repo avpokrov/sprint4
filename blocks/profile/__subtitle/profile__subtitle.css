@@ -6,3 +6,19 @@
     line-height: 1.22;
     margin-top: 16px;
 }
+
+@media all and (max-width: 700px){
+    .profile__subtitle{
+        font-size: 14px;
+        line-height: 1.2;
+    }
+}
+
+
+@media screen and (max-width: 619px) {
+    .profile__subtitle{
+        text-align: center;
+        margin-top: 14px;
+    }
+    
+}

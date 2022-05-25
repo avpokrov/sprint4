@@ -6,8 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Изучение адаптивной верстки">
   <meta name="authot" content="Покровский Алексей">
-  <link rel="stylesheet" href="./vendor/normalize.css">
-  <link rel="stylesheet" href="./vendor/fonts.css">
   <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
@@ -15,25 +13,19 @@
 <body class="page">
     <div class="container">
         <header class="header section">
-            <img class="header__logo" src="./images/logo.png" alt="лого">
+            <div class="header__logo"></div>
         </header>
         <section class="profile section">
-            <div class="profile__avatar">
-                <img class="profile__avatar-img" src="./images/jak_iv_kusto.jpg" alt="Кусто">
-            </div>
-            <div class="profile__info">
-                <h2 class="profile__title">Жак-Ив Кусто</h2>
+            <img class="profile__avatar-img" src="./images/jak_iv_kusto.jpg" alt="Кусто">
+            <div>
+                <div class="profile__info">
+                  <h1 class="profile__title">Жак-Ив Кусто</h1>
+                  <button class="profile__edit-button button"></button>
+                </div>
                 <p class="profile__subtitle">Исследователь океана</p>
             </div>
-            <div class="profile__edit-button">
-                <img src="./images/pen.png" alt="кнопка">
-            </div>
-            <div class="profile__add-button">
-                <img src="./images/plus.png" alt="плюс">
-            </div>
+            <button class="profile__add-button button"></button>
         </section>
-    </div
-    
+    </div>    
 </body>
-
 </html>

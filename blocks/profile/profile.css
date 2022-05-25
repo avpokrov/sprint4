@@ -1,5 +1,7 @@
 .profile {
     padding-top: 37px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 120px 1fr 150px;
+    column-gap: 20px;
     align-items: center;
 }

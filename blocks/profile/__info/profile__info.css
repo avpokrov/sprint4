@@ -1,0 +1,5 @@
+.profile__info {
+    display: flex;
+    column-gap: 18px;
+    align-items: center;
+}

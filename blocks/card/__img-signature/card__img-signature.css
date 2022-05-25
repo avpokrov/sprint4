@@ -1,0 +1,6 @@
+.card__img-signature{
+    background-color: #FFFFFF;
+    margin: 0;
+    display: flex;
+    border-radius: 0 0 10px 10px;
+}

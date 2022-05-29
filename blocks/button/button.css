@@ -3,3 +3,8 @@
     background-position: center;
     cursor: pointer;
 }
+
+
+.button:active{
+    opacity: 0.6;
+}

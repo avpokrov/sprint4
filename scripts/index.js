@@ -1,24 +1,43 @@
-let popup = document.querySelector('.popup');
-let editButton = document.querySelector('.profile__edit-button');
-let closePopupButton = document.querySelector('.popup__close');
-let formPopup = document.querySelector('.popup__form');
-let nameProfile = document.querySelector('.profile__title');
-let infoProfile = document.querySelector('.profile__subtitle');
-let toFormNameProfile = popup.querySelector('.popup__input_name');
-let toFormInfoProfile = popup.querySelector('.popup__input_info');
+const popup = document.querySelector('.popup');
+const editButton = document.querySelector('.profile__edit-button');
+const closePopupButton = document.querySelector('.popup__close');
+const formPopup = document.querySelector('.popup__form');
+const nameProfile = document.querySelector('.profile__title');
+const infoProfile = document.querySelector('.profile__subtitle');
+const toFormNameProfile = popup.querySelector('.popup__input_name');
+const toFormInfoProfile = popup.querySelector('.popup__input_info');
 
-toFormNameProfile.value = nameProfile.textContent;
-toFormInfoProfile.value = infoProfile.textContent;
 
-editButton.addEventListener('click', openClosePopup);
-closePopupButton.addEventListener('click', openClosePopup);
-formPopup.addEventListener('submit', savePopupForm);
+editButton.addEventListener('click', function() {
+    
+    toFormNameProfile.value = nameProfile.textContent;
+    toFormInfoProfile.value = infoProfile.textContent;
+    openPopup(popup);
+});
 
-function openClosePopup() {
-    popup.classList.toggle('popup__open');    
+closePopupButton.addEventListener('click', function(event){
+    event.stopPropagation;
+    closePopup(popup);
+    
+});
+
+document.body.addEventListener('click', function(event) {
+    if (event.target.classList.contains('popup')) {
+        closePopup(popup);
+    }
+})
+
+formPopup.addEventListener('submit', function(event){
+    event.preventDefault();
+    nameProfile.textContent = toFormNameProfile.value;
+    infoProfile.textContent = toFormInfoProfile.value;
+    closePopup(popup);
+});
+
+function openPopup(popupElement) {
+    popupElement.classList.add('popup__open');    
 }
 
-function savePopupForm() {
-    console.log('click');
+function closePopup(popupElement) {
+    popupElement.classList.remove('popup__open');    
 }
-

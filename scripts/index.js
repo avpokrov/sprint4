@@ -14,6 +14,9 @@ const closePopup = popupElement => {
   popupElement.classList.remove('popup__open');    
 }
 
+const openEditProfilePopup = popupElement => {
+  
+}
 
 const formPopup = document.querySelector('.popup__form');
 const nameProfile = document.querySelector('.profile__title');

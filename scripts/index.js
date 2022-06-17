@@ -41,17 +41,29 @@ const submitAddCardForm = () => {
    closePopup(popupAddCard);
 }
 
+const addCard = (name,url) => {
+  const newCard = cardTemlate.querySelector('.card').cloneNode(true);
+  newCard.querySelector('.card__img').src = url;
+  newCard.querySelector('.card__title').textContent = name;
+  subscriptionEvent(newCard);
+  cards.insertAdjacentElement('afterbegin', newCard);
+
+}
+
+const addLike = likeButton => {
+  likeButton.classList.toggle('buttton-like_active');
+}
+
+const subscriptionEvent = card => {
+  card.querySelector('.button-like').addEventListener('click', event => {
+    const likeButton = event.target;
+    addLike(likeButton);     
+  });
+}
 
 const cardTemlate = document.querySelector('#card').content;
 const cards = document.querySelector('.cards');
 
-const addCard = (name,url) => {
-    const newCard = cardTemlate.querySelector('.card').cloneNode(true);
-    newCard.querySelector('.card__img').src = url;
-    newCard.querySelector('.card__title').textContent = name;
-    cards.insertAdjacentElement('afterbegin', newCard);
-
-}
 
 initialCards.forEach((item) => {
    addCard(item.name, item.link);

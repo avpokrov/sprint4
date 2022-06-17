@@ -6,6 +6,9 @@ const popupAddCard = document.querySelector('.popup_card_add');
 const openButtonAddCard = document.querySelector('.profile__add-button');
 const closeButtonAddCard = popupAddCard.querySelector('.popup__close');
 
+const popupCardImage = document.querySelector('.popup_card_img');
+const closeButtonPopupCardImg = popupCardImage.querySelector('.popup__close');
+
 const formProfileName = document.querySelector('.popup__input_name');
 const formProfileInfo = document.querySelector('.popup__input_info');
 const formAddCard = popupAddCard.querySelector('.popup__form');
@@ -50,16 +53,43 @@ const addCard = (name,url) => {
 
 }
 
+const getButton = event => {
+  return event.target;
+}
+
 const addLike = likeButton => {
   likeButton.classList.toggle('buttton-like_active');
 }
 
+const delCard = button => {
+  const card = button.closest('.card');
+  card.remove();
+}
+
+const openPopupImg = event => {
+    const card = getButton(event).closest('.card');
+    const src = card.querySelector('.card__img').src;
+    const name = card.querySelector('.card__title').textContent;
+    popupCardImage.querySelector('.popup__img').src = src;
+    popupCardImage.querySelector('.popup__signature').textContent = name;
+    openPopup(popupCardImage);
+}
+
 const subscriptionEvent = card => {
   card.querySelector('.button-like').addEventListener('click', event => {
-    const likeButton = event.target;
-    addLike(likeButton);     
+    addLike(getButton(event));     
   });
+
+  card.querySelector('.card__button-del').addEventListener('click', event =>{
+    delCard(getButton(event));
+  });
+
+  card.querySelector('.card__img').addEventListener('click', event => {
+    openPopupImg(event);
+  });
+
 }
+
 
 const cardTemlate = document.querySelector('#card').content;
 const cards = document.querySelector('.cards');
@@ -80,11 +110,10 @@ closeButtonProfile.addEventListener('click', event =>{
     
 });
 
-// document.body.addEventListener('click', event => {
-//     if (event.target.classList.contains('popup')) {
-//         closePopup(popup);
-//     }
-// })
+closeButtonPopupCardImg.addEventListener('click', event=> {
+  event.stopPropagation;
+  closePopup(popupCardImage);
+});
 
 popupEditProfile.addEventListener('submit', event => {
     event.preventDefault();

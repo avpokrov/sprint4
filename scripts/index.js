@@ -6,7 +6,7 @@ const popupAddCard = document.querySelector('.popup_card_add');
 const openButtonAddCard = document.querySelector('.profile__add-button');
 const closeButtonAddCard = popupAddCard.querySelector('.popup__close');
 
-const popupCardImage = document.querySelector('.popup_card_img');
+const popupCardImage = document.querySelector('.popup_card-img');
 const closeButtonPopupCardImg = popupCardImage.querySelector('.popup__close');
 
 const formProfileName = document.querySelector('.popup__input_name');
@@ -71,7 +71,7 @@ const openPopupImg = event => {
     const src = card.querySelector('.card__img').src;
     const name = card.querySelector('.card__title').textContent;
     popupCardImage.querySelector('.popup__img').src = src;
-    popupCardImage.querySelector('.popup__signature').textContent = name;
+    popupCardImage.querySelector('.popup__title_img').textContent = name;
     openPopup(popupCardImage);
 }
 

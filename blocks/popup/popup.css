@@ -5,9 +5,14 @@
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
-    display: none;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 0.3s, opacity 0.3s linear;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 
 

@@ -42,9 +42,10 @@
         <button class="popup__close button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form novalidate action="" class="popup__form">
-          <input type="text" name="nameProfile" class="popup__input popup__input_name"  minlength="2" maxlength="40" required>
-          <span>Тут будет текст ошибки состоящий мимнимум из двух строк</span>
-          <input type="text" name="infoProfile" class="popup__input popup__input_info" minlength="2" maxlength="200" required>
+          <input type="text" id="nameProfile" name="nameProfile" class="popup__input popup__input_name"  minlength="2" maxlength="40" required>
+          <span class="popup__error nameProfile-error"></span>
+          <input type="text" id="infoProfile" name="infoProfile" class="popup__input popup__input_info" minlength="2" maxlength="200" required>
+          <span class="popup__error infoProfile-error"></span>
           <button type="submit" class="popup__button-submit button">Сохранить</button>
         </form>
       </div>
@@ -54,9 +55,11 @@
       <div class="popup__content">
         <button class="popup__close button"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form action="" class="popup__form">
-          <input type="text" placeholder="Название" name="InfoCard" class="popup__input popup__input_info-card">
-          <input type="text" placeholder="Ссылка на картинку" name="srcCard" class="popup__input popup__input_src-card">
+        <form novalidate action="" class="popup__form">
+          <input type="text" placeholder="Название" id="InfoCard" name="InfoCard" class="popup__input popup__input_info-card" minlength="2" maxlength="30" required>
+          <span class="popup__error InfoCard-error"></span>
+          <input type="url" placeholder="Ссылка на картинку" id="srcCard" name="srcCard" class="popup__input popup__input_src-card" required>
+          <span class="popup__error srcCard-error"></span>
           <button type="submit" class="popup__button-submit button">Сохранить</button>
         </form>
       </div>

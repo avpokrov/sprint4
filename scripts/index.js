@@ -121,7 +121,7 @@ popupEditProfile.addEventListener('submit', event => {
     submitProfileForm(popupEditProfile);
 });
 
-openButtonAddCard.addEventListener('click', () => {
+openButtonAddCard.addEventListener('click', (evt) => {    
     openPopup(popupAddCard);
 });
 
@@ -132,8 +132,10 @@ closeButtonAddCard.addEventListener('click', event => {
 
 formAddCard.addEventListener('submit', event =>{
   event.preventDefault();
+  disabledButton(formAddCard.querySelector('.popup__button-submit'));
   submitAddCardForm();
 });
+
 
 enableValidation({
   formSelector: '.popup__form',

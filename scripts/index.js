@@ -19,7 +19,7 @@ const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 
 const openPopup = popupElement => {
-  popupElement.classList.add('popup__open');    
+  popupElement.classList.add('popup__open');  
 }
 
 const closePopup = popupElement => {
@@ -29,6 +29,7 @@ const closePopup = popupElement => {
 const openEditProfilePopup = popupElement => {
   formProfileName.value = profileTitle.textContent;
   formProfileInfo.value = profileSubtitle.textContent;
+  validateForm(popupElement.querySelector('.popup__form'));
   openPopup(popupElement);
 }
 

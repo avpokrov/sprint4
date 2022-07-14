@@ -5,6 +5,15 @@ const enableValidation = (config) => {
       });
 }
 
+const validateForm = (formElement) => {
+  const inputs = Array.from(formElement.querySelectorAll('.input'));
+  const button = formElement.querySelector('.popup__button-submit');
+  inputs.forEach((inputElemet) => {
+    isValid(formElement, inputElemet);
+  });
+  toggleButtonState(inputs, button);
+}
+
 const setEventListeners = (formElement, config) => {
   const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
@@ -14,9 +23,10 @@ const setEventListeners = (formElement, config) => {
       toggleButtonState(inputList, buttonElement);
     });
   });
-  toggleButtonState(inputList, buttonElement);
 
 }
+
+
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -40,14 +50,11 @@ const isValid = (formElement, inputElement) => {
 
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
-    console.log(inputElement);
-    console.log(inputElement.validity.valid);
     return !inputElement.validity.valid;
   })
-}; 
+};
 
 const toggleButtonState = (inputList, buttonElement) => {
-  console.log(hasInvalidInput(inputList));
   if(hasInvalidInput(inputList)) {
     buttonElement.classList.add('popup__button-submit_disable');
     buttonElement.setAttribute('disabled', true);

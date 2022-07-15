@@ -17,13 +17,42 @@ const formAddCardSrc = document.querySelector('.popup__input_src-card');
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
+let popupOpen;
 
 const openPopup = popupElement => {
-  popupElement.classList.add('popup__open');  
+  popupElement.classList.add('popup__open');
+  popupOpen = popupElement;  
+  setClosePopupOnPresskey(popupElement);
 }
 
+const setClosePopupOnPresskey = () => {
+  document.addEventListener('keypress', pressEsc);
+  }
+
+const delClosePopupOnPresskey = () => {
+    document.removeEventListener('keypress', pressEsc);
+    }
+
+const pressEsc = (evt) => {
+  if(evt.key == '1'){
+    closePopup(popupOpen);
+  } 
+}
+
+const setClosePopupOnClick = () => {  
+    popups = Array.from(document.querySelectorAll('.popup'));
+    popups.forEach((popupElement) => {
+      popupElement.addEventListener('click',(evt) => {
+        if(evt.target.classList.contains('popup')){
+          closePopup(popupElement);
+        }
+      });
+    });
+  }
+
 const closePopup = popupElement => {
-  popupElement.classList.remove('popup__open');    
+  popupElement.classList.remove('popup__open');
+
 }
 
 const openEditProfilePopup = popupElement => {
@@ -91,7 +120,6 @@ const subscriptionEvent = card => {
 
 }
 
-
 const cardTemlate = document.querySelector('#card').content;
 const cards = document.querySelector('.cards');
 
@@ -135,6 +163,8 @@ formAddCard.addEventListener('submit', event =>{
   disabledButton(formAddCard.querySelector('.popup__button-submit'));
   submitAddCardForm();
 });
+
+setClosePopupOnClick();
 
 
 enableValidation({

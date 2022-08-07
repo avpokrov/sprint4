@@ -1,3 +1,6 @@
+import Card from './Card.js';
+
+const cards = document.querySelector('.cards');
 const popupEditProfile = document.querySelector('.popup_profile_edit');
 const openButtonEditProfile = document.querySelector('.profile__edit-button');
 const closeButtonProfile = popupEditProfile.querySelector('.popup__close');
@@ -40,7 +43,7 @@ const pressEsc = (evt) => {
 }
 
 const setClosePopupOnClick = () => {  
-    popups = Array.from(document.querySelectorAll('.popup'));
+   const popups = Array.from(document.querySelectorAll('.popup'));
     popups.forEach((popupElement) => {
       popupElement.addEventListener('click',(evt) => {
         if(evt.target.classList.contains('popup')){
@@ -74,26 +77,8 @@ const submitAddCardForm = () => {
    closePopup(popupAddCard);
 }
 
-const addCard = (name,url) => {
-  const newCard = cardTemlate.querySelector('.card').cloneNode(true);
-  newCard.querySelector('.card__img').src = url;
-  newCard.querySelector('.card__title').textContent = name;
-  subscriptionEvent(newCard);
-  cards.insertAdjacentElement('afterbegin', newCard);
-
-}
-
 const getButton = event => {
   return event.target;
-}
-
-const addLike = likeButton => {
-  likeButton.classList.toggle('buttton-like_active');
-}
-
-const delCard = button => {
-  const card = button.closest('.card');
-  card.remove();
 }
 
 const openPopupImg = event => {
@@ -104,30 +89,6 @@ const openPopupImg = event => {
     popupCardImage.querySelector('.popup__title_img').textContent = name;
     openPopup(popupCardImage);
 }
-
-const subscriptionEvent = card => {
-  card.querySelector('.button-like').addEventListener('click', event => {
-    addLike(getButton(event));     
-  });
-
-  card.querySelector('.card__button-del').addEventListener('click', event =>{
-    delCard(getButton(event));
-  });
-
-  card.querySelector('.card__img').addEventListener('click', event => {
-    openPopupImg(event);
-  });
-
-}
-
-const cardTemlate = document.querySelector('#card').content;
-const cards = document.querySelector('.cards');
-
-
-initialCards.forEach((item) => {
-   addCard(item.name, item.link);
-
-});
 
 openButtonEditProfile.addEventListener('click', () => {
   openEditProfilePopup(popupEditProfile);
@@ -166,14 +127,28 @@ formAddCard.addEventListener('submit', event =>{
 
 setClosePopupOnClick();
 
-
-enableValidation({
+const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button-submit',
   inactiveButtonClass: 'popup__button-submit_disable',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
+  errorClass: 'popup__error_visible',
+  cardTemlate: '#card',
+  cardImg: '.card__img',
+  cardTitle: '.card__title',
+  cardButtonLike: '.button-like',
+  cardButtonDel: '.card__button-del',
+  cardLikeActive: 'buttton-like_active',
+
+}
+
+initialCards.forEach((item) => {
+  const card = new Card(item.name, item.link, config, openPopupImg);
+  cards.insertAdjacentElement('afterbegin', card.render());
+  
 });
+
+enableValidation(config);
 
 

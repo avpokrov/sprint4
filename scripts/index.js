@@ -1,4 +1,5 @@
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 const cards = document.querySelector('.cards');
 const popupEditProfile = document.querySelector('.popup_profile_edit');
@@ -17,6 +18,7 @@ const formProfileInfo = document.querySelector('.popup__input_info');
 const formAddCard = popupAddCard.querySelector('.popup__form');
 const formAddCardInfo = document.querySelector('.popup__input_info-card');
 const formAddCardSrc = document.querySelector('.popup__input_src-card');
+const formProfile = document.querySelector('.popup_profile_edit');
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -72,7 +74,7 @@ const submitProfileForm = popupElement => {
 }
 
 const submitAddCardForm = () => {
-   addCard(formAddCardInfo.value, formAddCardSrc.value);
+   addCard(formAddCardInfo.value, formAddCardSrc.value, config, openPopupImg);
    formAddCard.reset();
    closePopup(popupAddCard);
 }
@@ -143,12 +145,18 @@ const config = {
 
 }
 
-initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link, config, openPopupImg);
+const addCard = (name,link) => {
+  const card = new Card(name, link, config, openPopupImg);
   cards.insertAdjacentElement('afterbegin', card.render());
-  
+}
+
+initialCards.forEach((item) => {
+  addCard(item.name, item.link, config, openPopupImg);
 });
 
-enableValidation(config);
+// enableValidation(config);
+
+const popupProfile = new FormValidator(config, formProfile);
+popupProfile.enableValidation();
 
 

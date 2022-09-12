@@ -1,7 +1,8 @@
 import Card from './Card.js';
+import Section from './Section.js';
 import FormValidator from './FormValidator.js';
 
-const cards = document.querySelector('.cards');
+const cardContainer = '.cards';
 const popupEditProfile = document.querySelector('.popup_profile_edit');
 const openButtonEditProfile = document.querySelector('.profile__edit-button');
 const closeButtonProfile = popupEditProfile.querySelector('.popup__close');
@@ -144,14 +145,17 @@ const config = {
 
 }
 
-const addCard = (name,link) => {
-  const card = new Card(name, link, config, openPopupImg);
-  cards.insertAdjacentElement('afterbegin', card.render());
-}
+const addCards = new Section({
+    items: initialCards, 
+    renderer: (element) => {
+      const card = new Card(element.name, element.link, config, openPopupImg);
+      addCards.addItem(card.render());
+      }
+    }, 
+    cardContainer);
 
-initialCards.forEach((item) => {
-  addCard(item.name, item.link, config, openPopupImg);
-});
+addCards.renderItems();
+
 
 const formProfileValid = new FormValidator(config, formProfile);
 const formCardValid = new FormValidator(config, formAddCard);

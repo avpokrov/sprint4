@@ -1,6 +1,7 @@
 import Card from './Card.js';
 import Section from './Section.js';
 import FormValidator from './FormValidator.js';
+import Popup from './Popup.js';
 
 const cardContainer = '.cards';
 const popupEditProfile = document.querySelector('.popup_profile_edit');
@@ -130,6 +131,7 @@ formAddCard.addEventListener('submit', event =>{
 setClosePopupOnClick();
 
 const config = {
+  popupEditProfile: '.popup_profile_edit',
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button-submit',
@@ -161,4 +163,8 @@ const formProfileValid = new FormValidator(config, formProfile);
 const formCardValid = new FormValidator(config, formAddCard);
 formProfileValid.enableValidation();
 formCardValid.enableValidation();
+
+const popupProfile = new Popup(config.popupEditProfile);
+
+popupProfile.popupOpen();
 

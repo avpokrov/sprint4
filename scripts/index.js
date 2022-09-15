@@ -32,19 +32,19 @@ const openPopup = popupElement => {
   setClosePopupOnPresskey(popupElement);
 }
 
-const setClosePopupOnPresskey = () => {
-  document.addEventListener('keypress', pressEsc);
-  }
+// const setClosePopupOnPresskey = () => {
+//   document.addEventListener('keypress', pressEsc);
+//   }
 
-const delClosePopupOnPresskey = () => {
-    document.removeEventListener('keypress', pressEsc);
-    }
+// const delClosePopupOnPresskey = () => {
+//     document.removeEventListener('keypress', pressEsc);
+//     }
 
-const pressEsc = (evt) => {
-  if(evt.key == '1'){
-    closePopup(popupOpen);
-  } 
-}
+// const pressEsc = (evt) => {
+//   if(evt.key == '1'){
+//     closePopup(popupOpen);
+//   } 
+// }
 
 const setClosePopupOnClick = () => {  
    const popups = Array.from(document.querySelectorAll('.popup'));

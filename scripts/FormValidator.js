@@ -1,7 +1,7 @@
 class FormValidator {
     constructor(config, validForm) {
         this._config = config;
-        this._validForm = validForm;
+        this._validForm = document.querySelector(validForm);
     }
 
     enableValidation() {

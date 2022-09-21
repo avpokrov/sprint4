@@ -47,7 +47,7 @@ class PopupWithImage extends Popup {
 }
 
 class PopupWithForm extends Popup {
-    constructor(popupSelector,submitForm){
+    constructor({popupSelector,submitForm}){
         super(popupSelector);
         this._form = this._popup.querySelector('.popup__form');
         this._submitForm = submitForm;
@@ -56,14 +56,18 @@ class PopupWithForm extends Popup {
     _getInputValues(){
         this._inputValues = {};
         this._formFilds = this._popup.querySelectorAll('.popup__input');
-        this._formFilds.array.forEach(input => {
+        this._formFilds.forEach(input => {
             this._inputValues[input.name] = input.value; 
         });
         return this._inputValues;
     }
 
     setEventListeners(){
-        this._form.addEventListener('submit', this._submitForm);
+        this._form.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            this._submitForm(this._getInputValues());
+            this.popupClose();
+        });
         super.setEventListeners();
     }
 

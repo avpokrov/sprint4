@@ -7,7 +7,7 @@ class UserInfo {
         return {name: this._htmlUserInfo.textContent, 
                 info: this._htmlInfo.textContent};
     }
-    setUserInfo(name, info) {
+    setUserInfo({name, info}) {
         this._htmlUserInfo.textContent = name;
         this._htmlInfo.textContent = info;
     }

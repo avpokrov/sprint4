@@ -10,8 +10,8 @@ const openButtonEditProfile = document.querySelector('.profile__edit-button');
 const openButtonAddCard = document.querySelector('.profile__add-button');
 
 const popupAddCard = '.popup_card_add';
-const popupProfile = '.popup__form-profile';
-const popupImgCard = 'popup_card-img';
+const popupProfile = '.popup_profile_edit';
+const popupImgCard = '.popup_card-img';
 const formProfileName = '.popup__input_name';
 const formProfileInfo = '.popup__input_info';
 const formAddCard = document.querySelector('.popup__form-cardAdd');
@@ -21,17 +21,23 @@ const formAddCardSrc = document.querySelector('.popup__input_src-card');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 
-const workUserInfo = new UserInfo({formProfileName, formProfileInfo});
+const writeInfo = new UserInfo({
+  userInfo: '.profile__title',
+  info: '.profile__subtitle'
+});
 
-const formProfile = new PopupWithForm(popupProfile, 
-    (evt) => {
-    evt.preventDefault();
-    formValues = this._getInputValues();
-    workUserInfo.setUserInfo(formValues.nameProfile, formValues.infoProfile);
+const formProfile = new PopupWithForm({
+  popupSelector: '.popup_profile_edit', 
+  submitForm: (data) => {
+    writeInfo.setUserInfo({
+      name: data['nameProfile'], 
+      info: data['infoProfile']});
+  }
   });
 
-const formCardAdd = new PopupWithForm(popupAddCard);
-const formCardImage = new PopupWithImage(popupImgCard);
+
+// const formCardAdd = new PopupWithForm(popupAddCard);
+// const formCardImage = new PopupWithImage(popupImgCard);
 
 const openEditProfilePopup = popupElement => {
 //  formProfileName.value = profileTitle.textContent;

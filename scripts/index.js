@@ -32,29 +32,10 @@ const formProfile = new PopupWithForm({
     writeInfo.setUserInfo({
       name: data['nameProfile'], 
       info: data['infoProfile']});
-  }
+  }  
   });
 
-
-// const formCardAdd = new PopupWithForm(popupAddCard);
-// const formCardImage = new PopupWithImage(popupImgCard);
-
-const openEditProfilePopup = popupElement => {
-//  formProfileName.value = profileTitle.textContent;
-//  formProfileInfo.value = profileSubtitle.textContent;  
-}
-
-const submitProfileForm = popupElement => {
-  profileTitle.textContent = formProfileName.value;
-  profileSubtitle.textContent = formProfileInfo.value;
-  closePopup(popupElement);
-}
-
-const submitAddCardForm = () => {
-   addCard(formAddCardInfo.value, formAddCardSrc.value, config, openPopupImg);
-   formAddCard.reset();
-   closePopup(popupAddCard);
-}
+ formProfile.setEventListeners();
 
 const openPopupImg = event => {
     const card = getButton(event).closest('.card');
@@ -66,23 +47,9 @@ const openPopupImg = event => {
 }
 
  openButtonEditProfile.addEventListener('click', () => {
+    formProfile.setInputValues(writeInfo.getUserInfo());
     formProfile.popupOpen();
  });
-
-// popupEditProfile.addEventListener('submit', event => {
-//    event.preventDefault();
-//    submitProfileForm(popupEditProfile);
-// });
-
-openButtonAddCard.addEventListener('click', (evt) => {    
-    openPopup(popupAddCard);
-});
-
-formAddCard.addEventListener('submit', event =>{
-  event.preventDefault();
-  disabledButton(formAddCard.querySelector('.popup__button-submit'));
-  submitAddCardForm();
-});
 
 const config = {
   popupEditProfile: '.popup_profile_edit',

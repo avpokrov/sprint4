@@ -26,6 +26,19 @@ const writeInfo = new UserInfo({
   info: '.profile__subtitle'
 });
 
+ const openImgPopup = (name,url) => {
+  popupImg.popupOpen(name,url);
+}
+function getCard(dataElement) {
+  const card = new Card({
+    dataElement,
+    template: '#card',
+    clickOnCard: openImgPopup
+    } 
+  )
+  return card.render();
+}
+
 const formProfile = new PopupWithForm({
   popupSelector: '.popup_profile_edit', 
   submitForm: (data) => {
@@ -37,14 +50,8 @@ const formProfile = new PopupWithForm({
 
  formProfile.setEventListeners();
 
-const openPopupImg = event => {
-    const card = getButton(event).closest('.card');
-    const src = card.querySelector('.card__img').src;
-    const name = card.querySelector('.card__title').textContent;
-    popupCardImage.querySelector('.popup__img').src = src;
-    popupCardImage.querySelector('.popup__title_img').textContent = name;
-    openPopup(popupCardImage);
-}
+const popupImg = new PopupWithImage('.popup_card-img');
+popupImg.setEventListeners();
 
  openButtonEditProfile.addEventListener('click', () => {
     formProfile.setInputValues(writeInfo.getUserInfo());
@@ -59,26 +66,19 @@ const config = {
   submitButtonSelector: '.popup__button-submit',
   inactiveButtonClass: 'popup__button-submit_disable',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-  cardTemlate: '#card',
-  cardImg: '.card__img',
-  cardTitle: '.card__title',
-  cardButtonLike: '.button-like',
-  cardButtonDel: '.card__button-del',
-  cardLikeActive: 'buttton-like_active',
-
+  errorClass: 'popup__error_visible'
 }
 
 const addCards = new Section({
     items: initialCards, 
     renderer: (element) => {
-      const card = new Card(element.name, element.link, config, openPopupImg);
-      addCards.addItem(card.render());
+      return getCard(element);
       }
     }, 
     cardContainer);
 
 addCards.renderItems();
+
 
 
 const formProfileValid = new FormValidator(config, popupProfile);

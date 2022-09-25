@@ -2,15 +2,23 @@ class FormValidator {
     constructor(config, validForm) {
         this._config = config;
         this._validForm = document.querySelector(validForm);
+        this._inputList = Array.from(this._validForm.querySelectorAll(this._config.inputSelector));
+        this._buttonElement = this._validForm.querySelector(this._config.submitButtonSelector);
+    }
+
+    resetValidate() {
+      this._inputList.forEach(inputElemet => {
+        this._hideInputError(inputElemet);
+      } );
+      this._toggleButtonState(this._inputList, this._buttonElement)
+      
     }
 
     enableValidation() {
-        const inputList = Array.from(this._validForm.querySelectorAll(this._config.inputSelector));
-        const buttonElement = this._validForm.querySelector(this._config.submitButtonSelector);
-        inputList.forEach(inputElement => {
+        this._inputList.forEach(inputElement => {
           inputElement.addEventListener('input', () => {
             this._isValid(inputElement);
-            this._toggleButtonState(inputList, buttonElement);
+            this._toggleButtonState(this._inputList, this._buttonElement);
           });
         });
     }

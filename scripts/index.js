@@ -1,7 +1,7 @@
 import Card from './Card.js';
 import Section from './Section.js';
 import FormValidator from './FormValidator.js';
-import {Popup, PopupWithImage, PopupWithForm} from './Popup.js';
+import {PopupWithImage, PopupWithForm} from './Popup.js';
 import UserInfo from './UserInfo.js';
 
 const cardContainer = '.cards';
@@ -45,6 +45,7 @@ popupImg.setEventListeners();
 
  openButtonEditProfile.addEventListener('click', () => {
     formProfile.setInputValues(writeInfo.getUserInfo());
+    formProfileValid.resetValidate();
     formProfile.popupOpen();
  });
 
@@ -56,6 +57,7 @@ popupImg.setEventListeners();
   })
   popupCardAdd.setEventListeners();
   openButtonAddCard.addEventListener('click', () => {
+    formCardValid.resetValidate();
     popupCardAdd.popupOpen();
   })
 

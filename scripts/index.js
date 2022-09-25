@@ -6,20 +6,10 @@ import UserInfo from './UserInfo.js';
 
 const cardContainer = '.cards';
 const openButtonEditProfile = document.querySelector('.profile__edit-button');
-
 const openButtonAddCard = document.querySelector('.profile__add-button');
 
 const popupAddCard = '.popup_card_add';
 const popupProfile = '.popup_profile_edit';
-const popupImgCard = '.popup_card-img';
-const formProfileName = '.popup__input_name';
-const formProfileInfo = '.popup__input_info';
-const formAddCard = document.querySelector('.popup__form-cardAdd');
-const formAddCardInfo = document.querySelector('.popup__input_info-card');
-const formAddCardSrc = document.querySelector('.popup__input_src-card');
-
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
 
 const writeInfo = new UserInfo({
   userInfo: '.profile__title',
@@ -57,6 +47,18 @@ popupImg.setEventListeners();
     formProfile.setInputValues(writeInfo.getUserInfo());
     formProfile.popupOpen();
  });
+
+ const popupCardAdd = new PopupWithForm({
+   popupSelector: '.popup_card_add',
+   submitForm: (data) => {
+     addCards.addItem(getCard(data));
+   } 
+  })
+  popupCardAdd.setEventListeners();
+  openButtonAddCard.addEventListener('click', () => {
+    popupCardAdd.popupOpen();
+  })
+
 
 const config = {
   popupEditProfile: '.popup_profile_edit',

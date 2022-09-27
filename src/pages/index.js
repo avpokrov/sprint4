@@ -1,15 +1,19 @@
-import Card from './Card.js';
-import Section from './Section.js';
-import FormValidator from './FormValidator.js';
-import {PopupWithImage, PopupWithForm} from './Popup.js';
-import UserInfo from './UserInfo.js';
+import Card from '../components/Card.js';
+import Section from '../components/Section.js';
+import FormValidator from '../components/FormValidator.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
 
-const cardContainer = '.cards';
-const openButtonEditProfile = document.querySelector('.profile__edit-button');
-const openButtonAddCard = document.querySelector('.profile__add-button');
+import {initialCards,
+         config,
+         cardContainer,
+         openButtonEditProfile,
+         openButtonAddCard,
+         popupAddCard,
+         popupProfile} from '../utils/constants.js';
 
-const popupAddCard = '.popup_card_add';
-const popupProfile = '.popup_profile_edit';
+
 
 const writeInfo = new UserInfo({
   userInfo: '.profile__title',
@@ -17,7 +21,7 @@ const writeInfo = new UserInfo({
 });
 
  const openImgPopup = (name,url) => {
-  popupImg.popupOpen(name,url);
+  popupImg.open(name,url);
 }
 function getCard(dataElement) {
   const card = new Card({
@@ -46,7 +50,7 @@ popupImg.setEventListeners();
  openButtonEditProfile.addEventListener('click', () => {
     formProfile.setInputValues(writeInfo.getUserInfo());
     formProfileValid.resetValidate();
-    formProfile.popupOpen();
+    formProfile.open();
  });
 
  const popupCardAdd = new PopupWithForm({
@@ -58,20 +62,8 @@ popupImg.setEventListeners();
   popupCardAdd.setEventListeners();
   openButtonAddCard.addEventListener('click', () => {
     formCardValid.resetValidate();
-    popupCardAdd.popupOpen();
+    popupCardAdd.open();
   })
-
-
-const config = {
-  popupEditProfile: '.popup_profile_edit',
-  popupImageCard: '.popup_card-img',
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button-submit',
-  inactiveButtonClass: 'popup__button-submit_disable',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-}
 
 const addCards = new Section({
     items: initialCards, 
@@ -89,5 +81,3 @@ const formProfileValid = new FormValidator(config, popupProfile);
 const formCardValid = new FormValidator(config, popupAddCard);
 formProfileValid.enableValidation();
 formCardValid.enableValidation();
-
-

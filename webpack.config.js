@@ -13,6 +13,7 @@ module.exports = {
       },
     mode: 'development',
     devServer: {
+        devtool: "inline-source-map",
         static: path.resolve(__dirname, './dist'),
         compress: true,
         port: 8080,  

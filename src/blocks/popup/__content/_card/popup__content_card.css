@@ -1,6 +1,5 @@
 .popup__content_card{
-    width: auto;
-    height: auto;
-    border-radius: 0;
-    background: none;
+    width: 100%;
+    height: 100%;
+    align-items: center;
 }

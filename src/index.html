@@ -17,7 +17,10 @@
     </header>
     <main>
       <section class="profile section">
-        <img class="profile__avatar-img" src="<%=require('./images/jak_iv_kusto.jpg')%>" alt="Кусто">
+        <div class="profile__edit-box">
+          <img class="profile__avatar-img" src="" alt="Кусто">
+          <div class="profile__edit-img"></div>
+        </div>
         <div>
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -61,6 +64,28 @@
           <input type="url" placeholder="Ссылка на картинку" id="srcCard" name="link" class="popup__input popup__input_src-card" required>
           <span class="popup__error srcCard-error"></span>
           <button type="submit" disabled="true" class="popup__button-submit button popup__button-submit_disable">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_edit_img">
+      <div class="popup__content popup__content_edit-img">
+        <button class="popup__close button"></button>
+        <h2 class="popup__title popup__title_edit-img">Обновить аватар</h2>
+        <form novalidate action="" class="popup__form popup__form-cardAdd">
+          <input type="url" placeholder="Ссылка на аватар" id="srcAvatar" name="link" class="popup__input popup__input_src-avatar" required>
+          <span class="popup__error srcAvatar-error"></span>
+          <button type="submit" disabled="true" class="popup__button-submit button popup__button-submit_disable">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_submit popup__open">
+      <div class="popup__content popup__content_submit">
+        <button class="popup__close button"></button>
+        <h2 class="popup__title popup__title_edit-img">Вы уверены?</h2>
+        <form novalidate action="" class="popup__form popup__form-cardAdd">
+          <button type="submit" disabled="true" class="popup__button-submit button">Да</button>
         </form>
       </div>
     </div>

@@ -7,16 +7,41 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
-import {initialCards,
-         config,
+import { config,
          cardContainer,
          openButtonEditProfile,
          openButtonAddCard,
          popupAddCard,
          popupProfile,
-         configApi} from '../utils/constants.js';
+         popupEditAvatarClass,
+         popupSubmitClass,
+         buttonAvatarEditClass,
+         configApi,
+         avatarUser} from '../utils/constants.js';
 
+const buttonAvatarEdit = document.querySelector(buttonAvatarEditClass);
 const api = new Api(configApi);
+
+
+const popupEditAvatar =  new PopupWithForm({
+  popupSelector: popupEditAvatarClass,
+  submitForm: (data) => {
+    api.setUserAvatar(data)
+      .then((res) => {
+        avatarUser.src = data.link;
+      })
+  } 
+ });
+ popupEditAvatar.setEventListeners();
+
+const setProfileInfo = () => {
+  api.getUserInfo()
+    .then((userInfo) => {
+      avatarUser.src = userInfo.avatar;
+      writeInfo.setUserInfo(userInfo);
+  })
+};
+
 
 const writeInfo = new UserInfo({
   userInfo: '.profile__title',
@@ -39,9 +64,12 @@ function getCard(dataElement) {
 const formProfile = new PopupWithForm({
   popupSelector: '.popup_profile_edit', 
   submitForm: (data) => {
-    writeInfo.setUserInfo({
-      name: data['nameProfile'], 
-      info: data['infoProfile']});
+    api.setUserInfo(data)
+      .then((res) => {
+        writeInfo.setUserInfo({
+          name: res['name'], 
+          about: res['about']});
+      })
   }  
   });
 
@@ -80,13 +108,15 @@ popupImg.setEventListeners();
     addCards.renderItems();
   });
 
-api.getUserInfo()
-  .then((userInfo) => {
-    const imgUser = document.querySelector('.profile__avatar-img');
-    imgUser.src = userInfo.avatar;
-  })
+buttonAvatarEdit.addEventListener('click', () => {
+  popupEditAvatar.open();
+})
+
+setProfileInfo();
 
 const formProfileValid = new FormValidator(config, popupProfile);
 const formCardValid = new FormValidator(config, popupAddCard);
+const formAvatarValid = new FormValidator(config, popupEditAvatarClass);
 formProfileValid.enableValidation();
 formCardValid.enableValidation();
+formAvatarValid.enableValidation();

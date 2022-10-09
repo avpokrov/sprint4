@@ -3,7 +3,11 @@ export const openButtonEditProfile = document.querySelector('.profile__edit-butt
 export const openButtonAddCard = document.querySelector('.profile__add-button');
 export const popupAddCard = '.popup_card_add';
 export const popupProfile = '.popup_profile_edit';
+export const popupEditAvatarClass = '.popup_edit_img';
+export const popupSubmitClass =  '.popup_submit';
+export const buttonAvatarEditClass = '.profile__edit-img';
 export const apiUrl = 'https://mesto.nomoreparties.co/v1/cohort-51/cards';
+export const avatarUser = document.querySelector('.profile__avatar-img');
 
 export const config = {
     popupEditProfile: '.popup_profile_edit',

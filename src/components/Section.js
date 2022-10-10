@@ -1,20 +1,19 @@
 class Section {
-    constructor({items, renderer}, containerSelector) {
-        this._initialArray = items;
+    constructor({item, renderer}, containerSelector) {
+        this._item = item;
         this._renderer = renderer;
         this._container = document.querySelector(containerSelector);      
     }
 
     addItem(element) {
         this._container.prepend(element);
-      }
-    
-    renderItems () {
-        this._initialArray.forEach(item => {
-            const element = this._renderer(item);
-            this.addItem(element);
-        });
     }
+    
+    renderItems () {        
+        const element = this._renderer(this._item);
+        this.addItem(element);
+    };
 }
+
 
 export default Section;

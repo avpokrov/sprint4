@@ -51,6 +51,7 @@ const writeInfo = new UserInfo({
  const openImgPopup = (name,url) => {
   popupImg.open(name,url);
 }
+
 function getCard(dataElement) {
   const card = new Card({
     dataElement,
@@ -87,7 +88,17 @@ popupImg.setEventListeners();
  const popupCardAdd = new PopupWithForm({
    popupSelector: '.popup_card_add',
    submitForm: (data) => {
-     addCards.addItem(getCard(data));
+    api.addCard(data)
+      .then(res => {
+        const addCard = new Section ({
+          item: res,
+          renderer: (element) => {
+            return getCard(element);
+          }
+        }
+        ) 
+        addCard.renderItems();
+      })
    } 
   })
   popupCardAdd.setEventListeners();
@@ -98,15 +109,17 @@ popupImg.setEventListeners();
 
   api.getAllCard()
   .then((cards) => {
-    const addCards = new Section({
-      items: cards, 
-      renderer: (element) => {
-        return getCard(element);
-        }
-      }, 
-      cardContainer);  
-    addCards.renderItems();
-  });
+    cards.reverse().forEach(card => {
+      const addCard = new Section({
+        item: card, 
+        renderer: (element) => {
+          return getCard(element);
+          }
+        }, 
+        cardContainer);  
+      addCard.renderItems();
+    });
+    })
 
 buttonAvatarEdit.addEventListener('click', () => {
   popupEditAvatar.open();

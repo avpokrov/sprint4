@@ -38,13 +38,17 @@ class Api {
         }).then((res) => {  return res.json()});
     }
 
-    getMyId() {
-        this.getUserInfo()
-            .then((res) =>{
-                console.log(res._id);
-            })
-        
+    addCard({name, link}){
+        return fetch(`${this._url}/cards`,{
+            method: 'POST',
+            headers: this._headers,
+            body: JSON.stringify({
+                name: name,
+                link: link
+              })
+        }).then((res) => {return res.json()});
     }
+    
 
       
 }

@@ -95,8 +95,7 @@ popupImg.setEventListeners();
           renderer: (element) => {
             return getCard(element);
           }
-        }
-        ) 
+        },cardContainer) 
         addCard.renderItems();
       })
    } 

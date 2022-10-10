@@ -2,6 +2,7 @@ class Card {
     constructor({dataElement, template, clickOnCard}) {
         this._name = dataElement['name'];
         this._url = dataElement['link'];
+        this._likes = dataElement['likes']
         this._cardTemplate = template;
         this._clickOnCard = clickOnCard;
     }
@@ -39,7 +40,7 @@ class Card {
         this._card = this._getTemplate();
         this._card.querySelector('.card__img').src = this._url;
         this._card.querySelector('.card__title').textContent = this._name;
-        this._addEvent();
+        this._card.querySelector('.card__likes').textContent = this._likes.length;
         return this._card;
     }
 }

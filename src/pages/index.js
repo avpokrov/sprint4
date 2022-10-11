@@ -21,7 +21,11 @@ import { config,
 
 const buttonAvatarEdit = document.querySelector(buttonAvatarEditClass);
 const api = new Api(configApi);
-
+const section = new Section({   
+  renderer: (element) => {
+    return getCard(element);
+    }}, 
+  cardContainer);
 
 const popupEditAvatar =  new PopupWithForm({
   popupSelector: popupEditAvatarClass,
@@ -89,14 +93,9 @@ popupImg.setEventListeners();
    popupSelector: '.popup_card_add',
    submitForm: (data) => {
     api.addCard(data)
-      .then(res => {
-        const addCard = new Section ({
-          item: res,
-          renderer: (element) => {
-            return getCard(element);
-          }
-        },cardContainer) 
-        addCard.renderItems();
+      .then(res => {         
+        const renderedCard = section.renderItems(res);
+        section.addItem(renderedCard);
       })
    } 
   })
@@ -107,18 +106,9 @@ popupImg.setEventListeners();
   })
 
   api.getAllCard()
-  .then((cards) => {
-    cards.reverse().forEach(card => {
-      const addCard = new Section({
-        item: card, 
-        renderer: (element) => {
-          return getCard(element);
-          }
-        }, 
-        cardContainer);  
-      addCard.renderItems();
+  .then((cards) => {  
+       section.addCards(cards.reverse());
     });
-    })
 
 buttonAvatarEdit.addEventListener('click', () => {
   popupEditAvatar.open();

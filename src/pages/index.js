@@ -6,6 +6,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
+import PopupWithSubmit from '../components/PopupWithSubmit.js';
 
 import { config,
          cardContainer,
@@ -38,6 +39,13 @@ const popupEditAvatar =  new PopupWithForm({
  });
  popupEditAvatar.setEventListeners();
 
+const popupSubmit = new PopupWithSubmit({
+  popupSelector: popupSubmitClass,
+  submitForm: () => {console.log('Submit form')}
+});
+
+popupSubmit.setEventListeners();
+
 const setProfileInfo = () => {
   api.getUserInfo()
     .then((userInfo) => {
@@ -56,11 +64,18 @@ const writeInfo = new UserInfo({
   popupImg.open(name,url);
 }
 
+const openSubmitPopup = () => {
+  popupSubmit.open();
+}
+
+
+
 function getCard(dataElement) {
   const card = new Card({
     dataElement,
     template: '#card',
-    clickOnCard: openImgPopup
+    clickOnCard: openImgPopup,
+    clickOnDel: openSubmitPopup
     } 
   )
   return card.render();

@@ -1,10 +1,11 @@
 class Card {
-    constructor({dataElement, template, clickOnCard}) {
+    constructor({dataElement, template, clickOnCard, clickOnDel}) {
         this._name = dataElement['name'];
         this._url = dataElement['link'];
         this._likes = dataElement['likes']
         this._cardTemplate = template;
         this._clickOnCard = clickOnCard;
+        this._clickOnDel = clickOnDel;
     }
 
     _getTemplate() {
@@ -33,7 +34,7 @@ class Card {
     }
 
     _delCard(){
-        this._card.remove();
+        this._clickOnDel();
     }
 
     render() {

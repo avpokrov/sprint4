@@ -17,8 +17,8 @@ import { config,
          popupEditAvatarClass,
          popupSubmitClass,
          buttonAvatarEditClass,
-         configApi,
-         avatarUser} from '../utils/constants.js';
+         configApi
+          } from '../utils/constants.js';
 
 const buttonAvatarEdit = document.querySelector(buttonAvatarEditClass);
 const api = new Api(configApi);
@@ -40,31 +40,30 @@ const popupEditAvatar =  new PopupWithForm({
  popupEditAvatar.setEventListeners();
 
 const popupSubmit = new PopupWithSubmit({
-  popupSelector: popupSubmitClass,
-  submitForm: () => {console.log('Submit form')}
+  popupSelector: popupSubmitClass
 });
 
 popupSubmit.setEventListeners();
 
-const setProfileInfo = () => {
-  api.getUserInfo()
-    .then((userInfo) => {
-      avatarUser.src = userInfo.avatar;
-      writeInfo.setUserInfo(userInfo);
-  })
-};
-
-
 const writeInfo = new UserInfo({
   userInfo: '.profile__title',
-  info: '.profile__subtitle'
+  info: '.profile__subtitle',
+  avatarUserClass: '.profile__avatar-img'
 });
 
  const openImgPopup = (name,url) => {
   popupImg.open(name,url);
 }
 
-const openSubmitPopup = () => {
+const openSubmitPopup = (card) => {
+  popupSubmit.setActionSubmit(() => {
+    api.delCard(card.getId())
+      .then((data) =>{
+        card.remove();
+      })
+
+
+  })
   popupSubmit.open();
 }
 
@@ -75,7 +74,8 @@ function getCard(dataElement) {
     dataElement,
     template: '#card',
     clickOnCard: openImgPopup,
-    clickOnDel: openSubmitPopup
+    clickOnDel: openSubmitPopup,
+    myId: writeInfo.getMyId()
     } 
   )
   return card.render();
@@ -120,16 +120,17 @@ popupImg.setEventListeners();
     popupCardAdd.open();
   })
 
-  api.getAllCard()
-  .then((cards) => {  
-       section.addCards(cards.reverse());
-    });
-
 buttonAvatarEdit.addEventListener('click', () => {
   popupEditAvatar.open();
 })
 
-setProfileInfo();
+
+Promise.all([api.getAllCard(), api.getUserInfo()])
+  .then(([cards, userInfo]) => {
+    writeInfo.setUserInfo(userInfo);
+    section.addCards(cards.reverse());
+});
+
 
 const formProfileValid = new FormValidator(config, popupProfile);
 const formCardValid = new FormValidator(config, popupAddCard);

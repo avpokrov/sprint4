@@ -1,11 +1,13 @@
 class Card {
-    constructor({dataElement, template, clickOnCard, clickOnDel}) {
+    constructor({dataElement, template, clickOnCard, clickOnDel, myId}) {
+        this._data = dataElement;
         this._name = dataElement['name'];
         this._url = dataElement['link'];
         this._likes = dataElement['likes']
         this._cardTemplate = template;
         this._clickOnCard = clickOnCard;
         this._clickOnDel = clickOnDel;
+        this._myId = myId;
     }
 
     _getTemplate() {
@@ -34,7 +36,27 @@ class Card {
     }
 
     _delCard(){
-        this._clickOnDel();
+        this._clickOnDel(this);
+    }
+
+    _checkDelCard() {
+        if (this._getQwnerId() == this._myId){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    _getQwnerId(){
+        return this._data.owner._id;
+    }
+
+    getId(){
+        return this._data._id;
+    }
+
+    remove(){
+        this._card.remove();
     }
 
     render() {
@@ -42,6 +64,9 @@ class Card {
         this._card.querySelector('.card__img').src = this._url;
         this._card.querySelector('.card__title').textContent = this._name;
         this._card.querySelector('.card__likes').textContent = this._likes.length;
+        if(this._checkDelCard()){
+             this._card.querySelector('.card__button-del').style.display = 'none';  
+        }
         this._addEvent();
         return this._card;
     }

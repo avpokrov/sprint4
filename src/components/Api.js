@@ -48,6 +48,13 @@ class Api {
               })
         }).then((res) => {return res.json()});
     }
+
+    delCard(idCard){
+        return fetch(`${this._url}/cards/${idCard}`,{
+            method: 'DELETE',
+            headers: this._headers
+        }).then((res) => {return res.json()});
+    }
     
 
       

@@ -19,6 +19,7 @@ import { config,
          buttonAvatarEditClass,
          configApi
           } from '../utils/constants.js';
+import { CleanPlugin } from 'webpack';
 
 const buttonAvatarEdit = document.querySelector(buttonAvatarEditClass);
 const api = new Api(configApi);
@@ -67,7 +68,14 @@ const openSubmitPopup = (card) => {
   popupSubmit.open();
 }
 
-
+const clickOnLike = (card) => {
+  const likes = card.likes;
+  const myId = writeInfo.getMyId();
+  console.log(likes);
+  console.log(myId);
+  if(likes.find((element) => element._id == myId)){
+  }
+}
 
 function getCard(dataElement) {
   const card = new Card({
@@ -75,6 +83,7 @@ function getCard(dataElement) {
     template: '#card',
     clickOnCard: openImgPopup,
     clickOnDel: openSubmitPopup,
+    clickOnLike: clickOnLike,
     myId: writeInfo.getMyId()
     } 
   )

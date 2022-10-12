@@ -1,5 +1,5 @@
 class Card {
-    constructor({dataElement, template, clickOnCard, clickOnDel, myId}) {
+    constructor({dataElement, template, clickOnCard, clickOnDel, myId, clickOnLike}) {
         this._data = dataElement;
         this._name = dataElement['name'];
         this._url = dataElement['link'];
@@ -8,6 +8,7 @@ class Card {
         this._clickOnCard = clickOnCard;
         this._clickOnDel = clickOnDel;
         this._myId = myId;
+        this._clickOnLike = clickOnLike;
     }
 
     _getTemplate() {
@@ -19,10 +20,10 @@ class Card {
 
     _addEvent(){
         this._card.querySelector('.button-like').addEventListener('click', (evt) => {
-             this._addLike(evt);  
+            this._clickOnLike(this);  
           });
         this._card.querySelector('.card__button-del').addEventListener('click', (evt) =>{
-            this._delCard();
+            this._clickOnDel(this);
         });
         
         this._card.querySelector('.card__img').addEventListener('click', evt => {
@@ -33,10 +34,6 @@ class Card {
 
     _addLike(evt){
         evt.target.classList.toggle('buttton-like_active');
-    }
-
-    _delCard(){
-        this._clickOnDel(this);
     }
 
     _checkDelCard() {

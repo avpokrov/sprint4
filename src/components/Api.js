@@ -55,6 +55,20 @@ class Api {
             headers: this._headers
         }).then((res) => {return res.json()});
     }
+
+    setCardLike(idCard){
+        return fetch(`${this._url}/cards/${idCard}/likes`,{
+            method: 'PUT',
+            headers: this._headers
+        }).then((res) => {return res.json()});
+    }
+
+    delCardLike(idCard){
+        return fetch(`${this._url}/cards/${idCard}/likes`,{
+            method: 'DELETE',
+            headers: this._headers
+        }).then((res) => {return res.json()});
+    }
     
 
       

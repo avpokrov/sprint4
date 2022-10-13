@@ -67,16 +67,26 @@ const openSubmitPopup = (card) => {
   popupSubmit.open();
 }
 
+
+
+
 const clickOnLike = (card) => {
   const likes = card.getLikes();
   const myId = writeInfo.getMyId();
   if(likes.find((element) => element._id == myId)){
-    console.log(true);
+    api.removeCardLike(card.getId())
+       .then((res) => {
+         card.updateLikes(res);
+         console.log("Удалил Лайк " + res.likes);
+         card.changeLike();
+      });
+    
   } else {
      api.setCardLike(card.getId())
-       .then(res => {
-        console.log(res);
-         card.addLike();
+       .then((res) => {
+         card.updateLikes(res);
+         console.log("Добавляем Лайк " + res.likes);
+         card.changeLike();
       });
   }
 }

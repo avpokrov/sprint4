@@ -32,8 +32,15 @@ class Card {
 
     }
 
-    addLike(){
-        card.querySelector('.button-like').classList.add('buttton-like_active');
+    changeLike(){
+        this._card.querySelector('.button-like').classList.toggle('buttton-like_active');
+        this._card.querySelector('.card__likes').textContent = this._likes.length;
+    }
+
+    updateLikes(card){
+        this._likes = card['likes'];
+        console.log(card['likes']);
+        console.log(this._likes);
     }
 
     _checkDelCard() {
@@ -53,7 +60,7 @@ class Card {
     }
 
     getLikes(){
-        return this._data.likes;
+        return this._likes;
     }
 
     remove(){

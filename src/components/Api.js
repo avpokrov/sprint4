@@ -63,7 +63,7 @@ class Api {
         }).then((res) => {return res.json()});
     }
 
-    delCardLike(idCard){
+    removeCardLike(idCard){
         return fetch(`${this._url}/cards/${idCard}/likes`,{
             method: 'DELETE',
             headers: this._headers

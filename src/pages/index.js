@@ -19,7 +19,6 @@ import { config,
          buttonAvatarEditClass,
          configApi
           } from '../utils/constants.js';
-import { CleanPlugin } from 'webpack';
 
 const buttonAvatarEdit = document.querySelector(buttonAvatarEditClass);
 const api = new Api(configApi);
@@ -69,11 +68,16 @@ const openSubmitPopup = (card) => {
 }
 
 const clickOnLike = (card) => {
-  const likes = card.likes;
+  const likes = card.getLikes();
   const myId = writeInfo.getMyId();
-  console.log(likes);
-  console.log(myId);
   if(likes.find((element) => element._id == myId)){
+    console.log(true);
+  } else {
+     api.setCardLike(card.getId())
+       .then(res => {
+        console.log(res);
+         card.addLike();
+      });
   }
 }
 

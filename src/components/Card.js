@@ -32,8 +32,8 @@ class Card {
 
     }
 
-    _addLike(evt){
-        evt.target.classList.toggle('buttton-like_active');
+    addLike(){
+        card.querySelector('.button-like').classList.add('buttton-like_active');
     }
 
     _checkDelCard() {
@@ -50,6 +50,10 @@ class Card {
 
     getId(){
         return this._data._id;
+    }
+
+    getLikes(){
+        return this._data.likes;
     }
 
     remove(){

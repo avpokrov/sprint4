@@ -16,6 +16,10 @@ class UserInfo {
         this._id = _id;
     }
 
+    setAvatar(data){
+        this._avatarUser.src = data.link;
+    }
+
     getMyId(){
         return this._id;
     }

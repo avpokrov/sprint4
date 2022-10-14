@@ -31,6 +31,11 @@ class Popup {
             this.close();
         }
     }
+
+    saveMessage(messege) {
+        const buttonPopup = this._popup.querySelector('.popup__button-submit');
+        buttonPopup.textContent = messege;
+    }
 }
 
 export default Popup;

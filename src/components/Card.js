@@ -39,14 +39,18 @@ class Card {
 
     updateLikes(card){
         this._likes = card['likes'];
-        console.log(card['likes']);
-        console.log(this._likes);
     }
 
     _checkDelCard() {
         if (this._getQwnerId() == this._myId){
             return false;
         } else {
+            return true;
+        }
+    }
+
+    checkLike() {
+        if(this._likes.find((element) => element._id == this._myId)){
             return true;
         }
     }
@@ -71,9 +75,13 @@ class Card {
         this._card = this._getTemplate();
         this._card.querySelector('.card__img').src = this._url;
         this._card.querySelector('.card__title').textContent = this._name;
-        this._card.querySelector('.card__likes').textContent = this._likes.length;
         if(this._checkDelCard()){
              this._card.querySelector('.card__button-del').style.display = 'none';  
+        }
+        if(this.checkLike()){
+            this.changeLike();
+        } else {
+            this._card.querySelector('.card__likes').textContent = this._likes.length;
         }
         this._addEvent();
         return this._card;

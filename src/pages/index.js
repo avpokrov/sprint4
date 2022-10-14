@@ -31,9 +31,13 @@ const section = new Section({
 const popupEditAvatar =  new PopupWithForm({
   popupSelector: popupEditAvatarClass,
   submitForm: (data) => {
+    popupEditAvatar.saveMessage('Сохранение...');
     api.setUserAvatar(data)
       .then((res) => {
-        avatarUser.src = data.link;
+        writeInfo.setAvatar(data);
+      })
+      .finally((res) => {
+        popupEditAvatar.saveMessage('Сохранить');
       })
   } 
  });
@@ -67,17 +71,11 @@ const openSubmitPopup = (card) => {
   popupSubmit.open();
 }
 
-
-
-
 const clickOnLike = (card) => {
-  const likes = card.getLikes();
-  const myId = writeInfo.getMyId();
-  if(likes.find((element) => element._id == myId)){
+  if(card.checkLike()){
     api.removeCardLike(card.getId())
        .then((res) => {
          card.updateLikes(res);
-         console.log("Удалил Лайк " + res.likes);
          card.changeLike();
       });
     
@@ -85,7 +83,6 @@ const clickOnLike = (card) => {
      api.setCardLike(card.getId())
        .then((res) => {
          card.updateLikes(res);
-         console.log("Добавляем Лайк " + res.likes);
          card.changeLike();
       });
   }
@@ -107,11 +104,13 @@ function getCard(dataElement) {
 const formProfile = new PopupWithForm({
   popupSelector: '.popup_profile_edit', 
   submitForm: (data) => {
+    formProfile.saveMessage('Сохраненние...');
     api.setUserInfo(data)
       .then((res) => {
-        writeInfo.setUserInfo({
-          name: res['name'], 
-          about: res['about']});
+        writeInfo.setUserInfo(res);
+      })
+      .finally((res) => {
+        formProfile.saveMessage('Сохранить');
       })
   }  
   });
@@ -130,10 +129,13 @@ popupImg.setEventListeners();
  const popupCardAdd = new PopupWithForm({
    popupSelector: '.popup_card_add',
    submitForm: (data) => {
+    popupCardAdd.saveMessage('Сохранение...')
     api.addCard(data)
       .then(res => {         
         const renderedCard = section.renderItems(res);
         section.addItem(renderedCard);
+      }).finally((res) => {
+        popupCardAdd.saveMessage('Сохранить');
       })
    } 
   })
